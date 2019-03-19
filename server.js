@@ -1,7 +1,7 @@
 const express = require('express');
-const routes = require('./routes');
+const postRoutes = require('./routes');
 const server = express();
 
-server.use(routes);
+server.use('/', postRoutes);
 
 module.exports = server;

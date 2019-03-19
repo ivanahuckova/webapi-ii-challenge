@@ -1,6 +1,5 @@
-const server = require('express');
-const port = 8000;
+const server = require('./server');
 
-server.listen(port, () => {
-  console.log(`Server is running on port ${8000}`);
+server.listen(9000, () => {
+  console.log(`Server is running on port 9000`);
 });
