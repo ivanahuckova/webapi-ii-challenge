@@ -7,7 +7,7 @@ routes.use(express.json());
 
 // =========== GET ROUTES ========== //
 
-routes.get('/api/posts', async (req, res) => {
+routes.get('/', async (req, res) => {
   try {
     const posts = await db.find();
     res.status(200).json(posts);
@@ -16,7 +16,7 @@ routes.get('/api/posts', async (req, res) => {
   }
 });
 
-routes.get('/api/posts/:id', async (req, res) => {
+routes.get('/:id', async (req, res) => {
   try {
     const post = await db.findById(req.params.id);
     if (post.length > 0) {
@@ -31,7 +31,7 @@ routes.get('/api/posts/:id', async (req, res) => {
 
 // =========== POST ROUTES ========== //
 
-routes.post('/api/posts', async (req, res) => {
+routes.post('/', async (req, res) => {
   try {
     const post = await db.insert(req.body);
     if (post.id) {
@@ -47,7 +47,7 @@ routes.post('/api/posts', async (req, res) => {
 
 // =========== DELETE ROUTES ========== //
 
-routes.delete('/api/posts/:id', async (req, res) => {
+routes.delete('/:id', async (req, res) => {
   try {
     const post = await db.remove(req.params.id);
     if (post) {
@@ -62,7 +62,7 @@ routes.delete('/api/posts/:id', async (req, res) => {
 
 // =========== PUT ROUTES ========== //
 
-routes.put('/api/posts/:id', async (req, res) => {
+routes.put('/:id', async (req, res) => {
   try {
     const post = await db.update(req.params.id, req.body);
     if (post) {
