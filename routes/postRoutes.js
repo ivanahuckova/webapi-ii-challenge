@@ -1,13 +1,15 @@
 const express = require('express');
-const db = require('./data/db');
+const db = require('../data/db');
 
 const routes = express.Router();
-
-routes.use(express.json());
 
 // =========== GET ROUTES ========== //
 
 routes.get('/', async (req, res) => {
+  res.status(200).json('Hello person! You need to go to /api/posts to work with database.');
+});
+
+routes.get('/api/posts', async (req, res) => {
   try {
     const posts = await db.find();
     res.status(200).json(posts);
@@ -16,7 +18,7 @@ routes.get('/', async (req, res) => {
   }
 });
 
-routes.get('/:id', async (req, res) => {
+routes.get('/api/posts/:id', async (req, res) => {
   try {
     const post = await db.findById(req.params.id);
     if (post.length > 0) {
@@ -31,7 +33,7 @@ routes.get('/:id', async (req, res) => {
 
 // =========== POST ROUTES ========== //
 
-routes.post('/', async (req, res) => {
+routes.post('/api/posts/', async (req, res) => {
   try {
     const post = await db.insert(req.body);
     if (post.id) {
@@ -47,7 +49,7 @@ routes.post('/', async (req, res) => {
 
 // =========== DELETE ROUTES ========== //
 
-routes.delete('/:id', async (req, res) => {
+routes.delete('/api/posts/:id', async (req, res) => {
   try {
     const post = await db.remove(req.params.id);
     if (post) {
@@ -62,7 +64,7 @@ routes.delete('/:id', async (req, res) => {
 
 // =========== PUT ROUTES ========== //
 
-routes.put('/:id', async (req, res) => {
+routes.put('/api/posts/:id', async (req, res) => {
   try {
     const post = await db.update(req.params.id, req.body);
     if (post) {
